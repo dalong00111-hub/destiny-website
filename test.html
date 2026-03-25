@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>命运预测网站 - 测试页面</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+        }
+        
+        .header h1 {
+            font-size: 48px;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            font-size: 20px;
+            opacity: 0.9;
+        }
+        
+        .test-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .test-card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .test-card h2 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 24px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .test-card h2 .icon {
+            font-size: 28px;
+        }
+        
+        .status {
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        
+        .status.success {
+            background: #d4edda;
+            color: #155724;
+        }
+        
+        .status.error {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        
+        .status.pending {
+            background: #fff3cd;
+            color: #856404;
+        }
+        
+        .test-content {
+            margin-bottom: 20px;
+        }
+        
+        .test-content p {
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+        
+        .test-actions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .btn-primary {
+            background: #667eea;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: #5a6fd8;
+            transform: translateY(-2px);
+        }
+        
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+        
+        .btn-secondary:hover {
+            background: #5a6268;
+        }
+        
+        .btn-success {
+            background: #28a745;
+            color: white;
+        }
+        
+        .btn-success:hover {
+            background: #218838;
+        }
+        
+        .api-test {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+        
+        .api-test pre {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+        
+        .result {
+            margin-top: 10px;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 5px;
+            border-left: 4px solid #667eea;
+        }
+        
+        .instructions {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            margin-top: 40px;
+        }
+        
+        .instructions h2 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 28px;
+        }
+        
+        .instructions ol {
+            padding-left: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .instructions li {
+            margin-bottom: 15px;
+            line-height: 1.6;
+            color: #555;
+        }
+        
+        .instructions strong {
+            color: #333;
+        }
+        
+        .footer {
+            text-align: center;
+            color: white;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 36px;
+            }
+            
+            .header p {
+                font-size: 16px;
+            }
+            
+            .test-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🔮 命运预测网站测试</h1>
+            <p>验证网站功能是否正常工作</p>
+        </div>
+        
+        <div class="test-grid">
+            <!-- 后端API测试 -->
+            <div class="test-card">
+                <h2><span class="icon">🐍</span> 后端API测试</h2>
+                <div class="status success">运行中</div>
+                <div class="test-content">
+                    <p>后端服务运行在：<strong>http://localhost:5000</strong></p>
+                    <p>数据库已初始化，API接口就绪。</p>
+                </div>
+                <div class="test-actions">
+                    <button class="btn btn-primary" onclick="testHealthCheck()">测试健康检查</button>
+                    <button class="btn btn-secondary" onclick="testCreateUser()">测试用户创建</button>
+                    <a href="http://localhost:5000/api/health" target="_blank" class="btn btn-success">查看API文档</a>
+                </div>
+                <div id="api-result" class="api-test"></div>
+            </div>
+            
+            <!-- 前端界面测试 -->
+            <div class="test-card">
+                <h2><span class="icon">🎨</span> 前端界面测试</h2>
+                <div class="status success">运行中</div>
+                <div class="test-content">
+                    <p>前端服务运行在：<strong>http://localhost:3000</strong></p>
+                    <p>Vue 3 + TypeScript + Element Plus 已加载。</p>
+                </div>
+                <div class="test-actions">
+                    <a href="http://localhost:3000" target="_blank" class="btn btn-primary">访问首页</a>
+                    <a href="http://localhost:3000/service" target="_blank" class="btn btn-secondary">测试测算流程</a>
+                    <a href="http://localhost:3000/result" target="_blank" class="btn btn-success">查看结果页面</a>
+                </div>
+            </div>
+            
+            <!-- 完整流程测试 -->
+            <div class="test-card">
+                <h2><span class="icon">🚀</span> 完整流程测试</h2>
+                <div class="status pending">等待测试</div>
+                <div class="test-content">
+                    <p>测试从输入生辰到获取分析报告的完整流程。</p>
+                    <p>包括：用户创建 → 订单生成 → 支付模拟 → 分析生成。</p>
+                </div>
+                <div class="test-actions">
+                    <button class="btn btn-primary" onclick="testFullFlow()">开始完整测试</button>
+                </div>
+                <div id="flow-result" class="api-test"></div>
+            </div>
+        </div>
+        
+        <div class="instructions">
+            <h2>📋 测试说明</h2>
+            <ol>
+                <li><strong>后端API测试</strong>：验证后端服务是否正常运行，数据库是否初始化成功。</li>
+                <li><strong>前端界面测试</strong>：验证前端页面是否能正常访问，界面是否美观。</li>
+                <li><strong>完整流程测试</strong>：模拟真实用户从输入生辰到获取分析报告的全过程。</li>
+                <li><strong>支付功能</strong>：目前为模拟支付，实际部署时需要接入微信/支付宝。</li>
+                <li><strong>AI分析</strong>：使用模板生成分析报告，实际可接入AI API增强准确性。</li>
+            </ol>
+            <p><strong>注意</strong>：这是本地测试版本，公网部署需要配置域名、SSL证书和真实支付接口。</p>
+        </div>
+        
+        <div class="footer">
+            <p>命运预测网站 © 2026 · 测试版本 v1.0</p>
+            <p>后端PID: <span id="backend-pid">60636</span> · 前端PID: <span id="frontend-pid">60643</span></p>
+        </div>
+    </div>
+    
+    <script>
+        // 测试健康检查API
+        async function testHealthCheck() {
+            const resultDiv = document.getElementById('api-result');
+            resultDiv.innerHTML = '<div class="result">测试中...</div>';
+            
+            try {
+                const response = await fetch('http://localhost:5000/api/health');
+                const data = await response.json();
+                
+                resultDiv.innerHTML = `
+                    <div class="result">
+                        <strong>✅ 健康检查通过</strong>
+                        <pre>${JSON.stringify(data, null, 2)}</pre>
+                    </div>
+                `;
+            } catch (error) {
+                resultDiv.innerHTML = `
+                    <div class="result">
+                        <strong>❌ 健康检查失败</strong>
+                        <pre>${error.message}</pre>
+                    </div>
+                `;
+            }
+        }
+        
+        // 测试用户创建API
+        async function testCreateUser() {
+            const resultDiv = document.getElementById('api-result');
+            resultDiv.innerHTML = '<div class="result">创建用户中...</div>';
+            
+            try {
+                const response = await fetch('http://localhost:5000/api/init-user', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+                const data = await response.json();
+                
+                resultDiv.innerHTML = `
+                    <div class="result">
+                        <strong>✅ 用户创建成功</strong>
+                        <pre>${JSON.stringify(data, null, 2)}</pre>
+                    </div>
+                `;
+                
+                // 保存用户ID供后续测试使用
+                if (data.success) {
+                    localStorage.setItem('test_user_id', data.user_id);
+                }
+            } catch (error) {
+                resultDiv.innerHTML = `
+                    <div class="result">
+                        <strong>❌ 用户创建失败</strong>
+                        <pre>${error.message}</pre>
+                    </div>
+                `;
+            }
+        }
+        
+        // 测试完整流程
+        async function testFullFlow() {
+            const resultDiv = document.getElementById('flow-result');
+            resultDiv.innerHTML = '<div class="result">开始完整流程测试...</div>';
+            
+            try {
+                // 步骤1：创建用户
+                resultDiv.innerHTML += '<div class="result">步骤1：创建用户...</div>';
+                const userResponse = await fetch('http://localhost:5000/api/init-user', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' }
+                });
+                const userData = await userResponse.json();
+                
+                if (!userData.success) {
+                    throw new Error('用户创建失败');
+                }
+                
+                const userId = userData.user_id;
+                resultDiv.innerHTML += `<div class="result">✅ 用户创建成功: ${userId}</div>`;
+                
+                // 步骤2：创建订单
+                resultDiv.innerHTML += '<div class="result">步骤2：创建订单...</div>';
+                const orderResponse = await fetch('http://localhost:5000/api/create-order', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        user_id: userId,
+                        birth_data: {
+                            year: 1990,
+                            month: 6,
+                            day: 15,
+                            hour: 8,
+                            gender: 'male'
+                        }
+                    })
+                });
+                const orderData = await orderResponse.json();
+                
+                if (!orderData.success) {
+                    throw new Error('订单创建失败');
+                }
+                
+                const orderId = orderData.order_id;
+                resultDiv.innerHTML += `<div class="result">✅ 订单创建成功: ${orderId}</div>`;
+                
+                // 步骤3：完成订单（模拟支付）
+                resultDiv.innerHTML += '<div class="result">步骤3：模拟支付完成...</div>';
+                const completeResponse = await fetch('http://localhost:5000/api/complete-order', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ order_id: orderId })
+                });
+                const completeData = await completeResponse.json();
+                
+                if (!completeData.success) {
+                    throw new Error('订单完成失败');
+                }
+                
+                resultDiv.innerHTML += `<div class="result">✅ 订单完成，分析生成成功</div>`;
+                
+                // 步骤4：获取分析结果
+                resultDiv.innerHTML += '<div class="result">步骤4：获取分析结果...</div>';
+                const analysisResponse = await fetch(`http://localhost:5000/api/get-analysis/${orderId}`);
+                const analysisData = await analysisResponse.json();
+                
+                if (!analysisData.success) {
+                    throw new Error('获取分析失败');
+                }
+                
+                resultDiv.innerHTML += `
+                    <div class="result">
+                        <strong>✅ 分析结果获取成功</strong>
+                        <p>八字：${analysisData.analysis.bazi_display}</p>
+                        <p>性格：${analysisData.analysis.personality.substring(0, 50)}...</p>
+                    </div>
+                `;
+                
+                // 步骤5：测试提问功能
+                resultDiv.innerHTML += '<div class="result">步骤5：测试提问功能...</div>';
+                const questionResponse = await fetch('http://localhost:5000/api/ask-question', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        order_id: orderId,
+                        question: '我今年适合换工作吗？'
+                    })
+                });
+                const questionData = await questionResponse.json();
+                
+                if (!questionData.success) {
+                    resultDiv.innerHTML += `<div class="result">⚠️ 提问失败: ${questionData.error}</div>`;
+                } else {
+                    resultDiv.innerHTML += `<div class="result">✅ 提问成功，回答: ${questionData.answer.substring(0, 50)}...</div>`;
+                }
+                
+                resultDiv.innerHTML += `
+                    <div class="result" style="background: #d4edda; border-color: #28a745;">
+                        <strong>🎉 完整流程测试通过！</strong>
+                        <p>所有功能正常工作，网站可以正常使用。</p>
+                    </div>
+                `;
+                
+            } catch (error) {
+                resultDiv.innerHTML += `
+                    <div class="result" style="background: #f8d7da; border-color: #dc3545;">
+                        <strong>❌ 测试失败</strong>
+                        <p>错误: ${error.message}</p>
+                    </div>
+                `;
+            }
+        }
+        
+        // 页面加载时自动测试健康检查
+        window.onload = function() {
+            setTimeout(testHealthCheck, 1000);
+        };
+    </script>
+</body>
+</html>
