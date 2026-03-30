@@ -1,0 +1,12 @@
+[build]
+builder = "nixpacks"
+buildCommand = "pip install -r requirements.txt"
+
+[deploy]
+startCommand = "python app.py"
+healthcheckPath = "/api/health"
+restartPolicyType = "ON_FAILURE"
+
+[variables]
+FLASK_ENV = "production"
+DATABASE_URL = "sqlite:///data/destiny.db"
